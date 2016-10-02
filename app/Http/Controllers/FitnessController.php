@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\FitnessActivity;
 use Auth;
 use Carbon\Carbon;
+use DateTimeZone;
 use DB;
 use Exception;
 use Facebook\Facebook;
@@ -182,6 +183,7 @@ class FitnessController extends Controller
 
             foreach ($graphEdge as $graphNode) {
                 if (array_key_exists('calories', $graphNode['data'])) {
+
                     FitnessActivity::create(
                         [
                             'user_id' => Auth::user()->id,
@@ -190,7 +192,7 @@ class FitnessController extends Controller
                             'distance' => $graphNode['data']['distance']['value'],
                             'calories' => $graphNode['data']['calories'],
                             'duration' => $graphNode['data']['duration']['value'],
-                            'start_time' => $graphNode['created_time']
+                            'start_time' => $graphNode['created_time']->setTimezone(new DateTimeZone('Europe/Warsaw'))
                         ]
                     );
                 }
