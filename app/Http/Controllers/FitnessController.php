@@ -218,24 +218,24 @@ class FitnessController extends Controller
         $user_id = Auth::user()->id;
 
         $run = DB::table('fitness_activities')
-            ->select('id as activity_id', 'start_time', DB::raw("(select sum(`calories`/`duration`) from fitness_activities where id = `activity_id`) as kcal_per_second"))
+            ->select('id as activity_id', 'start_time', DB::raw("(select sum(`calories`/`distance`) from fitness_activities where id = `activity_id`) as kcal_km"))
             ->where('type', 'runs')
             ->where('user_id', $user_id)
-            ->orderBy('kcal_per_second', 'desc')
+            ->orderBy('kcal_km', 'desc')
             ->first();
 
         $walk = DB::table('fitness_activities')
-            ->select('id as activity_id', 'start_time', DB::raw("(select sum(`calories`/`duration`) from fitness_activities where id = `activity_id`) as kcal_per_second"))
+            ->select('id as activity_id', 'start_time', DB::raw("(select sum(`calories`/`distance`) from fitness_activities where id = `activity_id`) as kcal_km"))
             ->where('type', 'walks')
             ->where('user_id', $user_id)
-            ->orderBy('kcal_per_second', 'desc')
+            ->orderBy('kcal_km', 'desc')
             ->first();
 
         $bike = DB::table('fitness_activities')
-            ->select('id as activity_id', 'start_time', DB::raw("(select sum(`calories`/`duration`) from fitness_activities where id = `activity_id`) as kcal_per_second"))
+            ->select('id as activity_id', 'start_time', DB::raw("(select sum(`calories`/`distance`) from fitness_activities where id = `activity_id`) as kcal_km"))
             ->where('type', 'bikes')
             ->where('user_id', $user_id)
-            ->orderBy('kcal_per_second', 'desc')
+            ->orderBy('kcal_km', 'desc')
             ->first();
 
         $data = [

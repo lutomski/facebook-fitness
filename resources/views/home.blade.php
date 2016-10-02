@@ -64,7 +64,7 @@
                                         <th>Czas</th>
                                         <th>Kilometry</th>
                                         <th>Spalone kalorie</th>
-                                        <th>kcal / min</th>
+                                        <th>kcal / km</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -83,7 +83,7 @@
                                             <td>{{ round($fitness_activity->duration / 60, 2) }} (min)</td>
                                             <td>{{ round($fitness_activity->distance, 2) }}</td>
                                             <td>{{ $fitness_activity->calories }}</td>
-                                            <td>{{ round($fitness_activity->calories / ($fitness_activity->duration / 60), 2) }}</td>
+                                            <td>{{ round($fitness_activity->calories / ($fitness_activity->distance), 2) }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
